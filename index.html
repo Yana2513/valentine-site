@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>For you</title>
+    <meta charset="UTF-8">
+    <title>For ypu</title>
     <style>
+        /* Фон и общий стиль */
         body {
-            background-color: #1a1a1a;
-            color: white;
-            text-align: center;
-            font-family: Arial;
+            margin: 0;
             padding-top: 100px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            overflow-x: hidden;
         }
 
         h1 {
             font-size: 50px;
+            color: white;
         }
 
         button {
@@ -23,97 +27,91 @@
             color: white;
             cursor: pointer;
             border-radius: 10px;
+            transition: 0.3s;
         }
 
         button:hover {
             background-color: hotpink;
-        }/* Падающие сердечки */
-.heart {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: crimson;
-    transform: rotate(45deg);
-    animation: fall 5s linear infinite;
-    z-index: 9999;
-}
+            transform: scale(1.1);
+        }
 
-.heart::before,
-.heart::after {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: crimson;
-    border-radius: 50%;
-}
+        #message {
+            margin-top: 30px;
+            font-size: 24px;
+            color: white;
+        }
 
-.heart::before {
-    top: -10px;
-    left: 0;
-}
+        /* Падающие сердечки */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: crimson;
+            transform: rotate(45deg);
+            animation: fall 5s linear infinite;
+            z-index: 9999;
+        }
 
-.heart::after {
-    top: 0;
-    left: -10px;
-}
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: crimson;
+            border-radius: 50%;
+        }
 
-@keyframes fall {
-    0% {
-        transform: translateY(0) rotate(45deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(700px) rotate(45deg);
-        opacity: 0;
-    }
-}
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
 
+        .heart::after {
+            top: 0;
+            left: -10px;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(700px) rotate(45deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
-
     <h1>Нажми сюда 💌</h1>
-
     <button onclick="showMessage()">Открыть</button>
+    <p id="message"></p>
 
-    <p id="message" style="margin-top: 30px;"></p>
+    <!-- Невидимый YouTube-плеер для музыки -->
+    <iframe id="ytplayer"
+        style="width:0;height:0;border:0;"
+        src="https://www.youtube.com/embed/SXjyfzL04bQ?autoplay=1&loop=1&playlist=SXjyfzL04bQ&controls=0&mute=0"
+        allow="autoplay">
+    </iframe>
 
     <script>
-function showMessage() {
-    // Создаём падающие сердечки
-    function createHeart() {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.animationDuration = 3 + Math.random() * 2 + "s";
-        document.body.appendChild(heart);
-        
-        setTimeout(() => {
-            heart.remove();
-        }, 5000);
-    }
+        function showMessage() {
+            // Падающие сердечки
+            function createHeart() {
+                const heart = document.createElement("div");
+                heart.className = "heart";
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }
+            setInterval(createHeart, 300);
 
-    // Появляются каждые 300 мс
-    setInterval(createHeart, 300);
-
-    // Показываем текст
-    document.getElementById("message").innerHTML = 
-        "Я люблю тебя(´｡• ω •｡`) ♡";
-
-    // Добавляем невидимую музыку
-    if (!document.getElementById("ytplayer")) {
-        const iframe = document.createElement("iframe");
-        iframe.id = "ytplayer";
-        iframe.style.width = "0";
-        iframe.style.height = "0";
-        iframe.style.border = "0";
-        iframe.src = "https://www.youtube.com/embed/SXjyfzL04bQ?autoplay=1&loop=1&playlist=SXjyfzL04bQ&controls=0&mute=0";
-        iframe.allow = "autoplay";
-        document.body.appendChild(iframe);
-    }
-}
-</script>
-
+            // Текст
+            document.getElementById("message").innerHTML = "Я люблю тебя(´｡• ω •｡`) ♡";
+        }
+    </script>
 </body>
 </html>
