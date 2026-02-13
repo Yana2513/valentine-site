@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Для тебя</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            font-family: Arial;
+            padding-top: 100px;
+        }
+
+        h1 {
+            font-size: 50px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: crimson;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        button:hover {
+            background-color: hotpink;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Нажми сюда 💌</h1>
+
+    <button onclick="showMessage()">Открыть</button>
+
+    <p id="message" style="margin-top: 30px;"></p>
+
+    <script>
+        function showMessage() {
+            document.getElementById("message").innerHTML = 
+            "Ты даже не представляешь, как сильно я хотела сделать это 💗";
+        }
+    </script>
+
+</body>
+</html>
