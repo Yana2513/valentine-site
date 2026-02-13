@@ -80,26 +80,40 @@
     <p id="message" style="margin-top: 30px;"></p>
 
     <script>
-        function showMessage() {// Создаём падающие сердечки
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.animationDuration = 3 + Math.random() * 2 + "s";
-    document.body.appendChild(heart);
-    
-    setTimeout(() => {
-        heart.remove();
-    }, 5000);
+function showMessage() {
+    // Создаём падающие сердечки
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+        document.body.appendChild(heart);
+        
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
+
+    // Появляются каждые 300 мс
+    setInterval(createHeart, 300);
+
+    // Показываем текст
+    document.getElementById("message").innerHTML = 
+        "Я люблю тебя(´｡• ω •｡`) ♡";
+
+    // Добавляем невидимую музыку
+    if (!document.getElementById("ytplayer")) {
+        const iframe = document.createElement("iframe");
+        iframe.id = "ytplayer";
+        iframe.style.width = "0";
+        iframe.style.height = "0";
+        iframe.style.border = "0";
+        iframe.src = "https://www.youtube.com/embed/SXjyfzL04bQ?autoplay=1&loop=1&playlist=SXjyfzL04bQ&controls=0&mute=0";
+        iframe.allow = "autoplay";
+        document.body.appendChild(iframe);
+    }
 }
-
-// Появляются каждые 300 мс
-setInterval(createHeart, 300);
-
-            document.getElementById("message").innerHTML = 
-            "Я люблю тебя(´｡• ω •｡`) ♡";
-        }
-    </script>
+</script>
 
 </body>
 </html>
