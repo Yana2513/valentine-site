@@ -27,7 +27,48 @@
 
         button:hover {
             background-color: hotpink;
-        }
+        }/* Падающие сердечки */
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: crimson;
+    transform: rotate(45deg);
+    animation: fall 5s linear infinite;
+    z-index: 9999;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: crimson;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -10px;
+    left: 0;
+}
+
+.heart::after {
+    top: 0;
+    left: -10px;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(700px) rotate(45deg);
+        opacity: 0;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -39,7 +80,22 @@
     <p id="message" style="margin-top: 30px;"></p>
 
     <script>
-        function showMessage() {
+        function showMessage() {// Создаём падающие сердечки
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+    document.body.appendChild(heart);
+    
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
+}
+
+// Появляются каждые 300 мс
+setInterval(createHeart, 300);
+
             document.getElementById("message").innerHTML = 
             "Ты даже не представляешь, как сильно я хотела сделать это 💗";
         }
